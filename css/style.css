@@ -68,7 +68,7 @@ h1>span {
     padding:25px 45px;
     color: var(--secondary-color);
     background: var(--primary-color);
-    /* box-shadow: 2px -1px 6px 1px var(--secondary-color); */
+   
     border-radius: 20px;
     border: none;
     cursor: pointer;
