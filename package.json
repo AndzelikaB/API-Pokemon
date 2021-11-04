@@ -1,0 +1,22 @@
+{
+  "name": "api-pokemon",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AndzelikaB/API-Pokemon.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AndzelikaB/API-Pokemon/issues"
+  },
+  "homepage": "https://github.com/AndzelikaB/API-Pokemon#readme",
+  "devDependencies": {
+    "gulp": "^4.0.2"
+  }
+}
