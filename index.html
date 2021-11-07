@@ -11,8 +11,8 @@
 </head>
 
 <body>
-    <div class="container">
-        <div class="header">
+    <main class="container">
+        <header class="header">
             <div class="header__title">
                 <h1> Pokemon <span> catalog </span> </h1>
             </div>
@@ -20,25 +20,27 @@
             <div class="header__search" aria-details="search">
                 <input type="text" id="header__search-field" value="Search">
             </div>
-        </div>
+        </header>
 
-        <div class="box">
-            <div class="box__card">
-                <h1>tototo</h1>
-            </div>
-        </div>
+        <section class="content" data-content>
+            <p class="content__info hide" data-info>There are no results</p>
+        </section>
+
+
 
         <div class="button">
-            <button type="button" class="button__more"> Load More! </button>
+            <button class="button__more" data-button> Load More! </button>
+            <div class="loader hide" data-loader></div>
         </div>
-    </div>
+    </main>
 
 
-    <div class=" loader">
-        <p></p>
-    </div>
     <script src="js/script.js"></script>
+    <script>
+        const catalog = new PokemonCard();
+        catalog.initializeCatalog();
+    </script>
+
 </body>
 
 </html>
-<!-- 1. loader kiedy się łądują karty  -->
