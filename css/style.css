@@ -67,3 +67,13 @@ body {
   border: none;
   cursor: pointer;
 }
+
+.content {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.content .card .card__header {
+  display: flex;
+  align-items: center;
+}
