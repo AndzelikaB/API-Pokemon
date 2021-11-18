@@ -77,3 +77,12 @@ body {
   display: flex;
   align-items: center;
 }
+.content .card .card__header .card__title {
+  display: flex;
+  justify-items: flex-start;
+  width: 100%;
+}
+.content .card .card__header .card__number {
+  display: flex;
+  justify-items: flex-end;
+}

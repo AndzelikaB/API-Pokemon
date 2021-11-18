@@ -66,11 +66,10 @@ class PokemonCard {
         return `
         <article class="card" data-card id=${id}> 
             <header class="card__header"> 
-            <h2> ${name} </h2>
-            
-            <p class="card__number">
-                Nr: ${number}
-            </p>
+                <h2 class="card__title"> ${name} </h2>
+                <p class="card__number">
+                    Nr: ${number}
+                </p>
             </header>
 
             <img class="card__image" src="${imageUrl}" alt="${name}"> </img>

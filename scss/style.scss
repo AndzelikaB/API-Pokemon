@@ -82,6 +82,17 @@ body {
         .card__header {
             display: flex;
             align-items: center;
+
+            .card__title{
+                display: flex;
+                justify-items: flex-start;
+                width: 100%;
+            }
+
+            .card__number{
+                display: flex;
+                justify-items: flex-end;
+            }
         }
     }
 }
