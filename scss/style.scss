@@ -74,25 +74,38 @@ body {
 }
 
 .content {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
+    display: grid;;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    column-gap: 40px;
 
     .card {
-        .card__header {
+        &__header {
             display: flex;
             align-items: center;
+            justify-content: space-between;
+            justify-items: center;
+            align-items: center;
 
-            .card__title{
-                display: flex;
-                justify-items: flex-start;
-                width: 100%;
-            }
+            .card{
+                &__title{
+                    display: flex;
+                    justify-items: flex-start;
+                    width: 100%;
+                }
+    
+                &__number{
+                    display: flex;
+                    justify-items: flex-end;
+                }
+            } 
+        }  
+        &__image{
+            width: 250px;
+        }
 
-            .card__number{
-                display: flex;
-                justify-items: flex-end;
-            }
+        .bold{
+            font-weight: 900;
+
         }
     }
 }

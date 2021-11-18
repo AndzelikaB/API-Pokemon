@@ -3,9 +3,6 @@ class PokemonCard {
         this.tabCards = [];
         this.catalog = null;
         this.info = null;
-        // this.search = null;
-        // this.button = null;
-        // this.loader = null;
 
         this.API = 'https://api.pokemontcg.io';
         this.API_VERSION = 'v1';
@@ -15,10 +12,6 @@ class PokemonCard {
 
 
         this.UiSelectors = {
-            // info: '[data-info]',
-            //     search = search,
-            //     button: '[data-button]',
-            //     loader: '[ data-loader]',
             content: '[data-content]',
             card: '[data-card]',
         };
@@ -26,10 +19,6 @@ class PokemonCard {
 
     initializeCatalog() {
         this.catalog = document.querySelector(this.UiSelectors.content);
-        // this.info = document.querySelector(this.UiSelectors.info);
-        // this.button = document.querySelector(this.UiSelectors.button);
-        // this.loader = document.querySelector(this.UiSelectors.loader);
-        // this.search = document.getElementById(this.UiSelectors.search);
         this.pullCards();
     }
 
@@ -54,11 +43,19 @@ class PokemonCard {
 
     // Showing data to the user
     showCards(tabCards) {
+        //działa
         // this.catalog.innerHTML += tabCards.map(function(card){
         //      return `${card.name}`
         // });  //  this.catalog.innerHTML += [tabCards.map((card) => `${card.name}`)];
       
-        this.catalog.innerHTML = [tabCards.map((card) => this.createCard(card))];
+        //to czemu to nie?
+        // this.catalog.innerHTML += tabCards.map(function(card){
+        //      return this.createCard(card)
+        // });
+        this.catalog.innerHTML = [tabCards.map((lol) => this.createCard(lol)).join('')]; // join dodaje łancuch znakow 
+        //to też nie
+       // this.catalog.innerHTML = [tabCards.map(function(lolx){createCard(lolx)})];
+
     }
 
    // Create view single card 

@@ -69,20 +69,29 @@ body {
 }
 
 .content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  column-gap: 40px;
+}
+.content .card__header {
   display: flex;
-  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  justify-items: center;
   align-items: center;
 }
-.content .card .card__header {
-  display: flex;
-  align-items: center;
-}
-.content .card .card__header .card__title {
+.content .card__header .card__title {
   display: flex;
   justify-items: flex-start;
   width: 100%;
 }
-.content .card .card__header .card__number {
+.content .card__header .card__number {
   display: flex;
   justify-items: flex-end;
+}
+.content .card__image {
+  width: 250px;
+}
+.content .card .bold {
+  font-weight: 900;
 }
