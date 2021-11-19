@@ -1,35 +1,56 @@
 class PokemonCard {
     constructor() {
-        this.tabCards = [];
-        this.catalog = null;
-        this.info = null;
         this.pageSize = 4;
         this.currentPage = 1;
+        this.tabCards = [];
+        this.newCards= [];
+        
+        this.info = null;
+      
+
+        this.catalog = null;
+        this.button = null;
+
         this.API = 'https://api.pokemontcg.io';
         this.API_VERSION = 'v1';
         this.API_RESOURCE = 'cards';
-
         this.API_ENDPOINT = `${this.API}/${this.API_VERSION}/${this.API_RESOURCE}`; // 'https://api.pokemontcg.io/v1/cards
 
 
         this.UiSelectors = {
             content: '[data-content]',
             card: '[data-card]',
+            button: '[data-button]',
         };
     }
 
     initializeCatalog() {
         this.catalog = document.querySelector(this.UiSelectors.content);
+        this.button = document.querySelector(this.UiSelectors.button);
+        this.moreCards();
         this.pullCards();
     }
+
+    // Add new Cards after click Load button
+    moreCards(){
+        this.button.addEventListener('click', () => this.pullCards());
+    }
+    
 
     //downloading data from the database
     async pullCards() {
         const {cards} = await this.fetchData(`${this.API_ENDPOINT}?page=${this.currentPage}&pageSize=${this.pageSize}`,); //DESTRUKTURYZACJA tablicy cards 
                                             //'https://api.pokemontcg.io/v1/cards?page=2&pageSize=1
-        this.tabCards = [...cards]; //przypisanie każdego elementu tablicy do zmiennej tabCards?
-        this.showCards(this.tabCards);
+
+       // this.tabCards = [...this.tabCards, ...cards]; //tabCards - nasze obecne karty - do tablicy dokłądamy po prostu cards xddd
+      //  this.newCards = [...cards]; //przypisanie każdego elementu tablicy do zmiennej newCards?
+
+        this.tabCards = [...this.tabCards, ...cards];
+        this.newCards = [...cards];
+        this.showCards(this.newCards);
         console.log();
+        this.currentPage++;
+
     }
 
     //connecting to the base
@@ -41,25 +62,7 @@ class PokemonCard {
 
     // Showing data to the user
     showCards(tabCards) {
-        //działa
-        // this.catalog.innerHTML += tabCards.map(function(card){
-        //      return `${card.name}`
-        // });  //  this.catalog.innerHTML += [tabCards.map((card) => `${card.name}`)];
-      
-        //to czemu to nie?
-        // this.catalog.innerHTML = [tabCards.map(function(card){
-        //     console.log(card);
-        //      return this.createCard(card)
-        // })];
-
-
-      this.catalog.innerHTML = [tabCards.map((lol) => this.createCard(lol)).join('')]; // join dodaje łancuch znakow 
-       
-       //this.catalog.innerHTML = [tabCards.map((lol) => {console.log(lol)})]; // join dodaje łancuch znakow 
-
-       //to też nie
-       // this.catalog.innerHTML = [tabCards.map(function(lolx){createCard(lolx)})];
-
+      this.catalog.innerHTML = [tabCards.map((card) => this.createCard(card)).join('')]; // join dodaje łancuch znakow 
     }
 
    // Create view single card 

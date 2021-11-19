@@ -6,7 +6,7 @@ body {
 }
 
 .container {
-  height: auto;
+  height: 2000px;
   display: flex;
   flex: 0 0 100%;
   max-width: 80%;
@@ -72,6 +72,8 @@ body {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   column-gap: 40px;
+  justify-items: center;
+  align-items: center;
 }
 .content .card__header {
   display: flex;
