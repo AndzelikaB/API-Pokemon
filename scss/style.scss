@@ -85,12 +85,12 @@ body {
             justify-content: space-between;
             justify-items: center;
             align-items: center;
+            margin:0px;
 
             .card{
                 &__title{
                     display: flex;
-                    justify-items: flex-start;
-                    width: 100%;
+                    justify-items: flex-start;    
                 }
     
                 &__number{
@@ -101,6 +101,15 @@ body {
         }  
         &__image{
             width: 250px;
+        }
+
+        &__details{
+            font-size: 18px;
+            color:rgb(211, 102, 1);
+            margin:0px;
+            >p{
+                margin:0px;
+            }
         }
 
         .bold{

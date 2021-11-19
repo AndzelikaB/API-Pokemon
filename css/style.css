@@ -79,11 +79,11 @@ body {
   justify-content: space-between;
   justify-items: center;
   align-items: center;
+  margin: 0px;
 }
 .content .card__header .card__title {
   display: flex;
   justify-items: flex-start;
-  width: 100%;
 }
 .content .card__header .card__number {
   display: flex;
@@ -91,6 +91,14 @@ body {
 }
 .content .card__image {
   width: 250px;
+}
+.content .card__details {
+  font-size: 18px;
+  color: #d36601;
+  margin: 0px;
+}
+.content .card__details > p {
+  margin: 0px;
 }
 .content .card .bold {
   font-weight: 900;

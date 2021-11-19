@@ -3,7 +3,8 @@ class PokemonCard {
         this.tabCards = [];
         this.catalog = null;
         this.info = null;
-
+        this.pageSize = 4;
+        this.currentPage = 1;
         this.API = 'https://api.pokemontcg.io';
         this.API_VERSION = 'v1';
         this.API_RESOURCE = 'cards';
@@ -24,14 +25,11 @@ class PokemonCard {
 
     //downloading data from the database
     async pullCards() {
-        const {
-            cards
-        } = await this.fetchData(this.API_ENDPOINT); //DESTRUKTURYZACJA tablicy cards 
-
+        const {cards} = await this.fetchData(`${this.API_ENDPOINT}?page=${this.currentPage}&pageSize=${this.pageSize}`,); //DESTRUKTURYZACJA tablicy cards 
+                                            //'https://api.pokemontcg.io/v1/cards?page=2&pageSize=1
         this.tabCards = [...cards]; //przypisanie każdego elementu tablicy do zmiennej tabCards?
-
         this.showCards(this.tabCards);
-        console.log(cards);
+        console.log();
     }
 
     //connecting to the base
@@ -49,11 +47,17 @@ class PokemonCard {
         // });  //  this.catalog.innerHTML += [tabCards.map((card) => `${card.name}`)];
       
         //to czemu to nie?
-        // this.catalog.innerHTML += tabCards.map(function(card){
+        // this.catalog.innerHTML = [tabCards.map(function(card){
+        //     console.log(card);
         //      return this.createCard(card)
-        // });
-        this.catalog.innerHTML = [tabCards.map((lol) => this.createCard(lol)).join('')]; // join dodaje łancuch znakow 
-        //to też nie
+        // })];
+
+
+      this.catalog.innerHTML = [tabCards.map((lol) => this.createCard(lol)).join('')]; // join dodaje łancuch znakow 
+       
+       //this.catalog.innerHTML = [tabCards.map((lol) => {console.log(lol)})]; // join dodaje łancuch znakow 
+
+       //to też nie
        // this.catalog.innerHTML = [tabCards.map(function(lolx){createCard(lolx)})];
 
     }
@@ -70,9 +74,11 @@ class PokemonCard {
             </header>
 
             <img class="card__image" src="${imageUrl}" alt="${name}"> </img>
-            <p class="card__description"><span class="bold">Supertype:</span> ${supertype}</p>
-                <p class="card__description ${ subtype ? '' : 'hide'}"> <span class="bold">Subtype:</span> ${subtype}</p>
-                <p class="card__description ${ rarity ? '' : 'hide'}"><span class="bold">Rarity:</span> ${rarity}</p>
+            <div class="card__details">
+                <p><span class="bold">Supertype:</span> ${supertype}</p>
+                <p ${ subtype ? '' : 'hide'}"> <span class="bold">Subtype:</span> ${subtype}</p>
+                <p ${ rarity ? '' : 'hide'}"><span class="bold">Rarity:</span> ${rarity}</p>
+            </div>
         </article> 
         `;
     }
