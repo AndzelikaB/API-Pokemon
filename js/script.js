@@ -10,6 +10,7 @@ class PokemonCard {
 
         this.catalog = null;
         this.button = null;
+        this.loader = null;
 
         this.API = 'https://api.pokemontcg.io';
         this.API_VERSION = 'v1';
@@ -21,12 +22,14 @@ class PokemonCard {
             content: '[data-content]',
             card: '[data-card]',
             button: '[data-button]',
+            loader:'[data-loader]',
         };
     }
 
     initializeCatalog() {
         this.catalog = document.querySelector(this.UiSelectors.content);
         this.button = document.querySelector(this.UiSelectors.button);
+        this.loader = document.querySelector(this.UiSelectors.loader);
         this.moreCards();
         this.pullCards();
     }
@@ -39,16 +42,22 @@ class PokemonCard {
 
     //downloading data from the database
     async pullCards() {
+        this.loader.classList.remove('hide');
+        this.button.classList.add('hide');
         const {cards} = await this.fetchData(`${this.API_ENDPOINT}?page=${this.currentPage}&pageSize=${this.pageSize}`,); //DESTRUKTURYZACJA tablicy cards 
                                             //'https://api.pokemontcg.io/v1/cards?page=2&pageSize=1
 
        // this.tabCards = [...this.tabCards, ...cards]; //tabCards - nasze obecne karty - do tablicy dokłądamy po prostu cards xddd
       //  this.newCards = [...cards]; //przypisanie każdego elementu tablicy do zmiennej newCards?
-
+        this.loader.classList.add('hide');
+        this.button.classList.remove('hide');
+        
         this.tabCards = [...this.tabCards, ...cards];
         this.newCards = [...cards];
-        this.showCards(this.newCards);
+        this.showCards(this.tabCards);
         console.log();
+        console.log(this.tabCards);
+
         this.currentPage++;
 
     }
@@ -62,9 +71,12 @@ class PokemonCard {
 
     // Showing data to the user
     showCards(tabCards) {
-      this.catalog.innerHTML = [tabCards.map((card) => this.createCard(card)).join('')]; // join dodaje łancuch znakow 
+      this.catalog.insertAdjacentHTML('beforeend', [
+          tabCards.map((card) => this.createCard(card)).join('')
+        ]); // join dodaje łancuch znakow 
     }
 
+    //insertAdjacentHTML - służy do wstawiania kawałka HTML na wybranej pozycji.
    // Create view single card 
     createCard({id, name, number, imageUrl, supertype, subtype, rarity}){
         return `
