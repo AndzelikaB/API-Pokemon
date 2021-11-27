@@ -11,6 +11,7 @@ class PokemonCard {
         this.catalog = null;
         this.button = null;
         this.loader = null;
+        this.search = null;
 
         this.API = 'https://api.pokemontcg.io';
         this.API_VERSION = 'v1';
@@ -23,6 +24,8 @@ class PokemonCard {
             card: '[data-card]',
             button: '[data-button]',
             loader:'[data-loader]',
+            search: 'search',
+            card: '[data-card]',
         };
     }
 
@@ -30,36 +33,39 @@ class PokemonCard {
         this.catalog = document.querySelector(this.UiSelectors.content);
         this.button = document.querySelector(this.UiSelectors.button);
         this.loader = document.querySelector(this.UiSelectors.loader);
-        this.moreCards();
+        this.search = document.getElementById(this.UiSelectors.search);
+        this.moreCardsBtn();
         this.pullCards();
     }
 
     // Add new Cards after click Load button
-    moreCards(){
+    moreCardsBtn(){
         this.button.addEventListener('click', () => this.pullCards());
+        this.search.addEventListener('keyup', () => this.filterCards());
     }
     
-
     //downloading data from the database
     async pullCards() {
-        this.loader.classList.remove('hide');
-        this.button.classList.add('hide');
+        this.toggleShowElement(this.loader, this.button);
         const {cards} = await this.fetchData(`${this.API_ENDPOINT}?page=${this.currentPage}&pageSize=${this.pageSize}`,); //DESTRUKTURYZACJA tablicy cards 
                                             //'https://api.pokemontcg.io/v1/cards?page=2&pageSize=1
 
        // this.tabCards = [...this.tabCards, ...cards]; //tabCards - nasze obecne karty - do tablicy dokłądamy po prostu cards xddd
       //  this.newCards = [...cards]; //przypisanie każdego elementu tablicy do zmiennej newCards?
-        this.loader.classList.add('hide');
-        this.button.classList.remove('hide');
+      this.toggleShowElement(this.loader, this.button);
+
         
         this.tabCards = [...this.tabCards, ...cards];
         this.newCards = [...cards];
-        this.showCards(this.tabCards);
+        this.showCards(this.newCards);
         console.log();
         console.log(this.tabCards);
 
         this.currentPage++;
+    }
 
+    toggleShowElement(...elements){
+        elements.forEach(element => element.classList.toggle('hide'));
     }
 
     //connecting to the base
@@ -96,6 +102,17 @@ class PokemonCard {
             </div>
         </article> 
         `;
+    }
+
+    filterCards(){
+        const searchQuery = this.search.value.toLowerCase();
+
+        document.querySelectorAll(this.UiSelectors.card).forEach((el) => el.classList.remove('hide'));
+
+        const filteredCards = this.tabCards.filter(({name}) => !name.toLowerCase().includes(searchQuery),);
+    
+        filteredCards.forEach(({id}) => 
+        document.getElementById(id).classList.add('hide'),);
     }
 }
 
