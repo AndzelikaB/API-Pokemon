@@ -6,7 +6,6 @@ class PokemonCard {
         this.newCards= [];
         
         this.info = null;
-      
 
         this.catalog = null;
         this.button = null;
@@ -64,6 +63,7 @@ class PokemonCard {
         this.currentPage++;
     }
 
+    // If set to false, then token will only be removed, but not added. If set to true, then token will only be added, but not removed.
     toggleShowElement(...elements){
         elements.forEach(element => element.classList.toggle('hide'));
     }
@@ -104,15 +104,16 @@ class PokemonCard {
         `;
     }
 
+    //after typing word in field search cards
     filterCards(){
         const searchQuery = this.search.value.toLowerCase();
-
         document.querySelectorAll(this.UiSelectors.card).forEach((el) => el.classList.remove('hide'));
 
+
+        //The filter() method creates a new array with all elements that pass the test implemented by the provided function.
         const filteredCards = this.tabCards.filter(({name}) => !name.toLowerCase().includes(searchQuery),);
     
-        filteredCards.forEach(({id}) => 
-        document.getElementById(id).classList.add('hide'),);
+        filteredCards.forEach(({id}) => document.getElementById(id).classList.add('hide'),);
     }
 }
 
