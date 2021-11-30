@@ -80,6 +80,14 @@ body {
     justify-items: center;
     align-items: center;
 
+    &__info{
+      font-size: 30px;
+      font-weight: 800;
+      text-transform:none;
+      color:#fff;
+
+    }
+
     .card {
         &__header {
             display: flex;

@@ -11,12 +11,12 @@ class PokemonCard {
         this.button = null;
         this.loader = null;
         this.search = null;
+        this.info = null;
 
         this.API = 'https://api.pokemontcg.io';
         this.API_VERSION = 'v1';
         this.API_RESOURCE = 'cards';
         this.API_ENDPOINT = `${this.API}/${this.API_VERSION}/${this.API_RESOURCE}`; // 'https://api.pokemontcg.io/v1/cards
-
 
         this.UiSelectors = {
             content: '[data-content]',
@@ -25,6 +25,7 @@ class PokemonCard {
             loader:'[data-loader]',
             search: 'search',
             card: '[data-card]',
+            info:'[data-info]',
         };
     }
 
@@ -33,6 +34,7 @@ class PokemonCard {
         this.button = document.querySelector(this.UiSelectors.button);
         this.loader = document.querySelector(this.UiSelectors.loader);
         this.search = document.getElementById(this.UiSelectors.search);
+        this.info = document.querySelector(this.UiSelectors.info);
         this.moreCardsBtn();
         this.pullCards();
     }
@@ -97,8 +99,9 @@ class PokemonCard {
             <img class="card__image" src="${imageUrl}" alt="${name}"> </img>
             <div class="card__details">
                 <p><span class="bold">Supertype:</span> ${supertype}</p>
-                <p ${ subtype ? '' : 'hide'}"> <span class="bold">Subtype:</span> ${subtype}</p>
-                <p ${ rarity ? '' : 'hide'}"><span class="bold">Rarity:</span> ${rarity}</p>
+                <p class= "${subtype ? '' : 'hide'}"> <span class="bold">Subtype:</span> ${subtype}</p>
+                <p class= "${rarity ? '' : 'hide'}">
+                <span class="bold">Rarity:</span> ${rarity}</p>
             </div>
         </article> 
         `;
@@ -109,9 +112,17 @@ class PokemonCard {
         const searchQuery = this.search.value.toLowerCase();
         document.querySelectorAll(this.UiSelectors.card).forEach((el) => el.classList.remove('hide'));
 
+        searchQuery.length 
+        ? this.button.classList.add('hide') 
+        : this.button.classList.remove('hide'); 
+
 
         //The filter() method creates a new array with all elements that pass the test implemented by the provided function.
         const filteredCards = this.tabCards.filter(({name}) => !name.toLowerCase().includes(searchQuery),);
+
+        filteredCards.length === this.tabCards.length 
+        ? this.info.classList.remove('hide') 
+        : this.info.classList.add('hide'); 
     
         filteredCards.forEach(({id}) => document.getElementById(id).classList.add('hide'),);
     }

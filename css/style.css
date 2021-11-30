@@ -75,6 +75,12 @@ body {
   justify-items: center;
   align-items: center;
 }
+.content__info {
+  font-size: 30px;
+  font-weight: 800;
+  text-transform: none;
+  color: #fff;
+}
 .content .card__header {
   display: flex;
   align-items: center;
