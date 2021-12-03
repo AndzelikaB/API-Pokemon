@@ -24,10 +24,9 @@ body {
         color: var(--secondary-color);
         font-size: 50px;
 
-        h1>span {
+        span {
             color: var(--primary-color);
         }
-
     }
 
     &__search {
@@ -35,18 +34,22 @@ body {
         justify-content: flex-end;
         align-items: flex-end;
         flex-grow: 1;
-    }
-}
 
-.header__search-field {
-    width: 200px;
-    height: 30px;
-    background: var(--primary-color);
-    font-size: 20px;
-    color: var(--secondary-color);
-    border-radius: 20px;
-    padding: 10px 20px;
-    border: none;
+        &-field {
+          width: 200px;
+          height: 30px;
+          background: var(--primary-color);
+          font-size: 20px;
+          color: var(--secondary-color);
+          border-radius: 20px;
+          padding: 10px 20px;
+          border: none;
+
+          &::placeholder{
+            color: #c9c9ad;
+          }
+      } 
+    }
 }
 
 .box {
@@ -84,7 +87,7 @@ body {
       font-size: 30px;
       font-weight: 800;
       text-transform:none;
-      color:#fff;
+      color:var(--secondary-color);
 
     }
 
@@ -100,12 +103,14 @@ body {
             .card{
                 &__title{
                     display: flex;
-                    justify-items: flex-start;    
+                    justify-items: flex-start; 
+                    color: var(--secondary-color);   
                 }
     
                 &__number{
                     display: flex;
                     justify-items: flex-end;
+                    color: var(--secondary-color);   
                 }
             } 
         }  
