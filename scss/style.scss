@@ -32,23 +32,39 @@ body {
     &__search {
         display: flex;
         justify-content: flex-end;
-        align-items: flex-end;
+        align-items: center;
         flex-grow: 1;
 
         &-field {
           width: 200px;
-          height: 30px;
+          height: 25px;
           background: var(--primary-color);
           font-size: 20px;
           color: var(--secondary-color);
           border-radius: 20px;
           padding: 10px 20px;
           border: none;
+          margin-right: 10px;
 
           &::placeholder{
             color: #c9c9ad;
           }
       } 
+      &-button{
+        background: transparent;
+        border-color: var(--primary-color);
+        border-radius: 50%;
+        color: var(--primary-color);
+        font-size: 20px;
+        padding:5px 6px;
+        cursor: pointer;
+
+
+      }
+    }
+    &__sort{
+      color: var(--primary-color);
+      font-size: 17px;
     }
 }
 
@@ -73,6 +89,16 @@ body {
         border-radius: 20px;
         border: none;
         cursor: pointer;
+    }
+
+    &__show-cards{
+      font-size: 25px;
+      padding: 25px 45px;
+      color: var(--secondary-color);
+      background: var(--primary-color);
+      border-radius: 20px;
+      border: none;
+      cursor: pointer;
     }
 }
 

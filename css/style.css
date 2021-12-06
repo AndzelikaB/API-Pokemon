@@ -30,21 +30,35 @@ body {
 .header__search {
   display: flex;
   justify-content: flex-end;
-  align-items: flex-end;
+  align-items: center;
   flex-grow: 1;
 }
 .header__search-field {
   width: 200px;
-  height: 30px;
+  height: 25px;
   background: var(--primary-color);
   font-size: 20px;
   color: var(--secondary-color);
   border-radius: 20px;
   padding: 10px 20px;
   border: none;
+  margin-right: 10px;
 }
 .header__search-field::placeholder {
   color: #c9c9ad;
+}
+.header__search-button {
+  background: transparent;
+  border-color: var(--primary-color);
+  border-radius: 50%;
+  color: var(--primary-color);
+  font-size: 20px;
+  padding: 5px 6px;
+  cursor: pointer;
+}
+.header__sort {
+  color: var(--primary-color);
+  font-size: 17px;
 }
 
 .box {
