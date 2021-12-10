@@ -4,6 +4,7 @@ class PokemonCard {
         this.currentPage = 1;
         this.tabCards = [];
         this.newCards= [];
+        this.aaa=[];
         
         this.info = null;
 
@@ -32,7 +33,6 @@ class PokemonCard {
             selectValue: '[data-select-value]',
             searchButton: '[data-search-btn]',
             btnShowCards: '[data-btn-show]',
-
         };
     }
 
@@ -44,7 +44,7 @@ class PokemonCard {
         this.info = document.querySelector(this.UiSelectors.info);
         this.selectValue = document.querySelector(this.UiSelectors.selectValue);
         this.searchButton = document.querySelector(this.UiSelectors.searchButton);
-        this.btnShowCards = document.querySelectorAll(this.UiSelectors.btnShowCards);
+        this.btnShowCards = document.querySelector(this.UiSelectors.btnShowCards);
         this.moreCardsBtn();
         this.pullCards();
     }
@@ -52,48 +52,13 @@ class PokemonCard {
     // Add new Cards after click Load button
     moreCardsBtn(){
         this.button.addEventListener('click', () => this.pullCards());
-        // this.search.addEventListener('keyup', () => this.filterCards());
-        // this.selectValue.addEventListener('change', () => this.searchBySubtype());
-        // this.selectValue.addEventListener('change', (item) => {
-        //     this.searchBySubtype();
-        //     console.log(item.target.value);
-        // });
-
-        // this.selectValue.addEventListener("click", function() {
-        //     var options = this.selectValue.querySelectorAll("option");
-        //     var count = options.length;
-        //     if(typeof(count) === "undefined" || count < 4)
-        //     {
-        //         addActivityItem();
-        //     }
-        // });
-  
-        // this.selectValue.addEventListener("change", function(item) {
-        //     this.selectValue = item.target.value;
-        //     console.log(this.selectValue);
-            
-        // });
-
-        this.searchButton.addEventListener('click', () => this.searchCard(this.selectValue.value, this.search.value.toLowerCase(), this.btnShowCards));
+        // this.search.addEventListener('keyup', () => this.filterCards();
+        this.searchButton.addEventListener('click', () => this.searchCard(this.selectValue.value, this.search.value.toLowerCase()));
+        console.log(this.btnShowCards[0]);
+        this.btnShowCards.addEventListener('click', () => this.grr());
 
     }
     
-                
-            // if(ix == "Subtype")
-            // {
-            //     console.log('są równe');
-            //     this.selectValue == 1;  
-                
-            //     console.log(ix);
-            // }
-            // else if(ix == 'Name'){
-            //     console.log('Name');
-            //     return 2;
-            // }
-            // else if(ix == 'Rarity'){
-            //     console.log('Rarity');
-            //     return 3;
-            // }
     //downloading data from the database
     async pullCards() {
         this.toggleShowElement(this.loader, this.button);
@@ -175,7 +140,7 @@ class PokemonCard {
     // }
 
     //function to search card 
-    searchCard(searchType, searchWord, btn){
+    searchCard(searchType, searchWord){
         let filteredCards;
 
         switch(searchType){
@@ -185,38 +150,29 @@ class PokemonCard {
 
             case 'Subtype':
                 filteredCards = this.tabCards.filter(({subtype}) => !subtype.toLowerCase().includes(searchWord),);
-                    btn.classList.remove('hide');
+                //     btn.classList.remove('hide');
 
-                console.log(filteredCards);
-                if (filteredCards.length <= 4){
-                    console.log('Brak kart');
-                    this.button.classList.add('hide');
-                    // filteredCards.classList.remove('hide');
-                }
+                // console.log(filteredCards);
+                // if (filteredCards.length <= 4){
+                //     console.log('Brak kart');
+                //     // this.button.classList.add('hide');
+                //     // filteredCards.classList.remove('hide');
+                // }
                 break;
             case 'Rarity':
                 filteredCards = this.tabCards.filter(({rarity}) => !rarity.toLowerCase().includes(searchWord),);
                 break;
             default:
-                    console.log('Name');
-
         }
-
+        this.btnShowCards.classList.remove('hide');
+        this.button.classList.add('hide');
+        this.aaa = filteredCards;
         filteredCards.forEach(({id}) => document.getElementById(id).classList.add('hide'),);
+    }
 
-
-        // if(searchType == "Name"){
-        //     const filteredCards = this.tabCards.filter(({name}) => !name.toLowerCase().includes(searchWord),);
-        //     filteredCards.forEach(({id}) => document.getElementById(id).classList.add('hide'),);
-        // }
-        // else if(searchType == "Subtype"){
-        //     const filteredCards = this.tabCards.filter(({subtype}) => !subtype.toLowerCase().includes(searchWord),);
-        //     filteredCards.forEach(({id}) => document.getElementById(id).classList.add('hide'),);
-        // }
-        // else if(searchType == "Rarity"){
-        //     const filteredCards = this.tabCards.filter(({rarity}) => !rarity.toLowerCase().includes(searchWord),);
-        //     filteredCards.forEach(({id}) => document.getElementById(id).classList.add('hide'),);
-        // }
-        
+    grr(){
+        this.button.classList.toggle('hide');
+        this.btnShowCards.classList.toggle('hide');
+        this.aaa.forEach(({id}) => document.getElementById(id).classList.toggle('hide'),);
     }
 }
