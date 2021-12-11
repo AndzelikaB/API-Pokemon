@@ -20,9 +20,9 @@
             </div>
 
             <div class="header__search" aria-details="search">
-                <input type="text" id="search" class="header__search-field" placeholder="Search...">
+                <input type="text" id="search" class="header__search-field" placeholder="Search..." onfocus="this.value=''">
               
-                <div class="header__sort">
+                <div class="header__search-sort">
                     <label> Sort by: </label>
                     <select class="select-values" data-select-value>
                         <option selected value="Name"> Name </option>
@@ -44,7 +44,7 @@
 
         <div class="button">
             <button class="button__more" data-button> Load More! </button>
-            <button class="button__show-cards hide" data-btn-show> Show Cards </button>
+            <button class="button__show-cards hide" data-btn-show> Show All Cards </button>
 
             <div class="loader hide" data-loader>Loading...</div>
         </div>

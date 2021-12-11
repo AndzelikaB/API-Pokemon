@@ -54,9 +54,7 @@ class PokemonCard {
         this.button.addEventListener('click', () => this.pullCards());
         // this.search.addEventListener('keyup', () => this.filterCards();
         this.searchButton.addEventListener('click', () => this.searchCard(this.selectValue.value, this.search.value.toLowerCase()));
-        console.log(this.btnShowCards[0]);
         this.btnShowCards.addEventListener('click', () => this.grr());
-
     }
     
     //downloading data from the database
@@ -72,9 +70,6 @@ class PokemonCard {
         this.tabCards = [...this.tabCards, ...cards];
         this.newCards = [...cards];
         this.showCards(this.newCards);
-        // console.log();
-        // console.log(this.tabCards);
-
         this.currentPage++;
     }
 
@@ -147,22 +142,14 @@ class PokemonCard {
             case 'Name':
                 filteredCards = this.tabCards.filter(({name}) => !name.toLowerCase().includes(searchWord),);
                 break;
-
             case 'Subtype':
                 filteredCards = this.tabCards.filter(({subtype}) => !subtype.toLowerCase().includes(searchWord),);
-                //     btn.classList.remove('hide');
-
-                // console.log(filteredCards);
-                // if (filteredCards.length <= 4){
-                //     console.log('Brak kart');
-                //     // this.button.classList.add('hide');
-                //     // filteredCards.classList.remove('hide');
-                // }
                 break;
             case 'Rarity':
                 filteredCards = this.tabCards.filter(({rarity}) => !rarity.toLowerCase().includes(searchWord),);
                 break;
             default:
+                console.log('Sorry, we are out of.');
         }
         this.btnShowCards.classList.remove('hide');
         this.button.classList.add('hide');
@@ -172,6 +159,7 @@ class PokemonCard {
 
     grr(){
         this.button.classList.toggle('hide');
+        this.search.value = '';
         this.btnShowCards.classList.toggle('hide');
         this.aaa.forEach(({id}) => document.getElementById(id).classList.toggle('hide'),);
     }

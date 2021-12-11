@@ -1,0 +1,1 @@
+Project realized in Vanilla JavaScript, Scss, HTML. The project is about working with an external API.
