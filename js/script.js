@@ -45,16 +45,16 @@ class PokemonCard {
         this.selectValue = document.querySelector(this.UiSelectors.selectValue);
         this.searchButton = document.querySelector(this.UiSelectors.searchButton);
         this.btnShowCards = document.querySelector(this.UiSelectors.btnShowCards);
-        this.moreCardsBtn();
+        this.EventListeners();
         this.pullCards();
     }
 
     // Add new Cards after click Load button
-    moreCardsBtn(){
+    EventListeners(){
         this.button.addEventListener('click', () => this.pullCards());
         // this.search.addEventListener('keyup', () => this.filterCards();
         this.searchButton.addEventListener('click', () => this.searchCard(this.selectValue.value, this.search.value.toLowerCase()));
-        this.btnShowCards.addEventListener('click', () => this.grr());
+        this.btnShowCards.addEventListener('click', () => this.showAllCards());
     }
     
     //downloading data from the database
@@ -91,8 +91,6 @@ class PokemonCard {
           tabCards.map((card) => this.createCard(card)).join('')
         ]); // join dodaje łancuch znakow 
     }
-
-    //insertAdjacentHTML - służy do wstawiania kawałka HTML na wybranej pozycji.
    // Create view single card 
     createCard({id, name, number, imageUrl, supertype, subtype, rarity}){
         return `
@@ -115,41 +113,41 @@ class PokemonCard {
         `;
     }
 
-    //after typing word in field search cards
-    // filterCards(){
-    //     const searchQuery = this.search.value.toLowerCase();
-    //     document.querySelectorAll(this.UiSelectors.card).forEach((el) => el.classList.remove('hide'));
-
-    //     searchQuery.length 
-    //     ? this.button.classList.add('hide') 
-    //     : this.button.classList.remove('hide'); 
-
-    //     //The filter() method creates a new array with all elements that pass the test implemented by the provided function.
-    //     const filteredCards = this.tabCards.filter(({name}) => !name.toLowerCase().includes(searchQuery),);
-
-    //     filteredCards.length === this.tabCards.length 
-    //     ? this.info.classList.remove('hide') 
-    //     : this.info.classList.add('hide'); 
-    
-    //     filteredCards.forEach(({id}) => document.getElementById(id).classList.add('hide'),);
-    // }
-
     //function to search card 
     searchCard(searchType, searchWord){
         let filteredCards;
 
         switch(searchType){
-            case 'Name':
-                filteredCards = this.tabCards.filter(({name}) => !name.toLowerCase().includes(searchWord),);
+            case 'Name':{
+                filteredCards = this.tabCards.filter(({name}) => !name.toLowerCase().includes(searchWord));
+
+                filteredCards.length === this.tabCards.length 
+                ? this.info.classList.remove('hide') 
+                : this.info.classList.add('hide');
+
                 break;
-            case 'Subtype':
-                filteredCards = this.tabCards.filter(({subtype}) => !subtype.toLowerCase().includes(searchWord),);
+            }
+            case 'Subtype':{
+                filteredCards = this.tabCards.filter(({subtype}) => !subtype.toLowerCase().includes(searchWord));
+                
+                filteredCards.length === this.tabCards.length 
+                ? this.info.classList.remove('hide') 
+                : this.info.classList.add('hide');
+
                 break;
-            case 'Rarity':
-                filteredCards = this.tabCards.filter(({rarity}) => !rarity.toLowerCase().includes(searchWord),);
+                }
+            case 'Rarity':{
+                filteredCards = this.tabCards.filter(({rarity}) => !rarity.toLowerCase().includes(searchWord));
+
+                filteredCards.length === this.tabCards.length 
+                ? this.info.classList.remove('hide') 
+                : this.info.classList.add('hide');
+
                 break;
-            default:
-                console.log('Sorry, we are out of.');
+            }
+            default:{
+                console.log("Sorry, something's wrong");
+            }
         }
         this.btnShowCards.classList.remove('hide');
         this.button.classList.add('hide');
@@ -157,7 +155,8 @@ class PokemonCard {
         filteredCards.forEach(({id}) => document.getElementById(id).classList.add('hide'),);
     }
 
-    grr(){
+    showAllCards(){
+        this.info.classList.add('hide');
         this.button.classList.toggle('hide');
         this.search.value = '';
         this.btnShowCards.classList.toggle('hide');

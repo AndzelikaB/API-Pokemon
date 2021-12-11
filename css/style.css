@@ -49,19 +49,20 @@ body::-webkit-scrollbar-thumb:hover {
   flex-grow: 1;
 }
 .container .header__search-field {
-  width: 200px;
-  height: 25px;
+  width: 160px;
   background: transparent;
-  font-size: 20px;
+  font-size: 1rem;
   color: var(--secondary-color);
-  border-radius: 20px;
-  padding: 10px 20px;
+  padding: 5px 10px;
   border: none;
-  margin-right: 10px;
   border-bottom: 1px solid var(--secondary-color);
 }
 .container .header__search-field::placeholder {
   color: #c9c9ad;
+}
+.container .header__search-field:focus-visible {
+  outline: none;
+  border-bottom: 1px solid #fff;
 }
 .container .header__search-sort .select-values {
   color: var(--secondary-color);
@@ -71,12 +72,16 @@ body::-webkit-scrollbar-thumb:hover {
   padding: 5px;
   margin: 5px;
   cursor: pointer;
+  margin: 0 10px;
+}
+.container .header__search-sort .select-values .option {
+  color: var(--secondary-color);
+  background-color: #333;
 }
 .container .header__search-button {
   background: transparent;
   border-color: var(--primary-color);
   border-radius: 50%;
-  border: none;
   color: var(--primary-color);
   font-size: 20px;
   padding: 5px 6px;
@@ -115,7 +120,7 @@ body::-webkit-scrollbar-thumb:hover {
   align-items: center;
 }
 .container .content__info {
-  font-size: 30px;
+  font-size: 25px;
   font-weight: 800;
   text-transform: none;
   color: var(--secondary-color);
