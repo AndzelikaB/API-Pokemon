@@ -49,10 +49,8 @@ class PokemonCard {
         this.pullCards();
     }
 
-    // Add new Cards after click Load button
     EventListeners(){
         this.button.addEventListener('click', () => this.pullCards());
-        // this.search.addEventListener('keyup', () => this.filterCards();
         this.searchButton.addEventListener('click', () => this.searchCard(this.selectValue.value, this.search.value.toLowerCase()));
         this.btnShowCards.addEventListener('click', () => this.showAllCards());
     }
@@ -60,20 +58,14 @@ class PokemonCard {
     //downloading data from the database
     async pullCards() {
         this.toggleShowElement(this.loader, this.button);
-        const {cards} = await this.fetchData(`${this.API_ENDPOINT}?page=${this.currentPage}&pageSize=${this.pageSize}`,); //DESTRUKTURYZACJA tablicy cards 
-                                            //'https://api.pokemontcg.io/v1/cards?page=2&pageSize=1
-
-       // this.tabCards = [...this.tabCards, ...cards]; //tabCards - nasze obecne karty - do tablicy dokłądamy po prostu cards xddd
-      //  this.newCards = [...cards]; //przypisanie każdego elementu tablicy do zmiennej newCards?
+        const {cards} = await this.fetchData(`${this.API_ENDPOINT}?page=${this.currentPage}&pageSize=${this.pageSize}`,);
         this.toggleShowElement(this.loader, this.button);
-
         this.tabCards = [...this.tabCards, ...cards];
         this.newCards = [...cards];
         this.showCards(this.newCards);
         this.currentPage++;
     }
 
-    // If set to false, then token will only be removed, but not added. If set to true, then token will only be added, but not removed.
     toggleShowElement(...elements){
         elements.forEach(element => element.classList.toggle('hide'));
     }
@@ -89,8 +81,9 @@ class PokemonCard {
     showCards(tabCards) {
       this.catalog.insertAdjacentHTML('beforeend', [
           tabCards.map((card) => this.createCard(card)).join('')
-        ]); // join dodaje łancuch znakow 
+        ]); 
     }
+    
    // Create view single card 
     createCard({id, name, number, imageUrl, supertype, subtype, rarity}){
         return `
@@ -140,7 +133,7 @@ class PokemonCard {
                 filteredCards = this.tabCards.filter(({rarity}) => !rarity.toLowerCase().includes(searchWord));
 
                 filteredCards.length === this.tabCards.length 
-                ? this.info.classList.remove('hide') 
+                ? this.info.classList.remove('hide') & this.search.querySelector(disabled)
                 : this.info.classList.add('hide');
 
                 break;
